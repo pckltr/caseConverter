@@ -47,11 +47,19 @@ body {
 
 .button-list__item .button {
     border: none;
-    background: #5fbbff;
+    background-color: #5fbbff;
     color: #ffffff;
     padding: 0.5em 1em;
     cursor: pointer;
     font-size: 0.88rem;
+}
+
+.button-list__item .button[data-case-type="clear"] {
+    background-color: #ffc20f;
+}
+
+.button-list__item .button[data-case-type="clear"]:hover {
+    background-color: #ff881d;
 }
 
 .button-list__item .button:hover {
