@@ -1,5 +1,5 @@
 (function() {
-    
+
     var init = function() {
 
         var inputArea = document.getElementById('input-area'),
@@ -13,11 +13,11 @@
             if (currentInputTemp !== originalInputTemp) {
                 originalInput = currentInput;
             }
-        }
+        };
 
         var setOriginal = function() {
             inputArea.value = originalInput;
-        }
+        };
 
         var copyToClipboard = function() {
             getOriginal();
@@ -35,7 +35,7 @@
                 }
             }
             return;
-        }
+        };
 
         var findCharacterAndChange = function(character) {
             getOriginal();
@@ -53,7 +53,7 @@
             }
             inputArea.value = valueArray.join("");
             return;
-        }
+        };
 
         var reverseCase = function() {
             getOriginal();
@@ -67,7 +67,7 @@
             }
             inputArea.value = valueArray.join("");
             return;
-        }
+        };
 
         var changeCase = function(event) {
             switch (event.target.dataset.caseType) {
