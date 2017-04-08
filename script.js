@@ -1,5 +1,7 @@
 (function() {
+    
     var init = function() {
+
         var inputArea = document.getElementById('input-area'),
             buttonList = document.getElementsByClassName('button'),
             originalInput = "";
@@ -42,11 +44,11 @@
                 if (i === 0) {
                     valueArray[i] = valueArray[i].toUpperCase();
                 }
-                if (i < valueArray.length - 1 && valueArray[i] === character) {
-                    valueArray[i + 1] = valueArray[i + 1].toUpperCase();
+                if (valueArray[i - 1] === character || valueArray[i - 1] === "\r" || valueArray[i - 1] === "\n") {
+                    valueArray[i] = valueArray[i].toUpperCase();
                 }
-                if (i < valueArray.length - 2 && valueArray[i] === character && character === ".") {
-                    valueArray[i + 2] = valueArray[i + 2].toUpperCase();
+                if (valueArray[i - 2] === character && valueArray[i - 1] === " " && character === ".") {
+                    valueArray[i] = valueArray[i].toUpperCase();
                 }
             }
             inputArea.value = valueArray.join("");
@@ -100,12 +102,15 @@
             }
             return;
         };
-        
+
         for (var i = 0; i < buttonList.length; i++) {
             buttonList[i].addEventListener("click", changeCase);
         }
+
     };
+
     document.addEventListener("DOMContentLoaded", function() {
         init();
     });
+
 })();

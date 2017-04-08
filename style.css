@@ -54,6 +54,10 @@ body {
     font-size: 0.88rem;
 }
 
+.button-list__item .button:hover {
+    background: #1f95ff;
+}
+
 .button-list__item .button[data-case-type="clear"] {
     background-color: #ffc20f;
 }
@@ -62,8 +66,12 @@ body {
     background-color: #ff881d;
 }
 
-.button-list__item .button:hover {
-    background: #1f95ff;
+.button-list__item .button[data-case-type="restore"] {
+    background-color: #9fe038;
+}
+
+.button-list__item .button[data-case-type="restore"]:hover {
+    background-color: #27c61a;
 }
 
 .rainbow {
