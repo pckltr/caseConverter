@@ -69,6 +69,27 @@
             return;
         };
 
+        var normalize = function() {
+            getOriginal();
+
+            var valueArray = inputArea.value.split(""),
+                punctuation = ["!", "?", ",", ".", ")", ":", ";", "\"", "\'"];
+
+            for (var p = 0; p < punctuation.length; p++) {
+                for (var i = 0; i < valueArray.length; i++) {
+                    if (valueArray[i] === punctuation[p]) {
+                        valueArray.splice(i + 1, 0, " ");
+                        if (valueArray[i - 1] === " ") {
+                            valueArray.splice(i - 1, 1);
+                        }
+                    }
+                }
+            }
+
+            inputArea.value = valueArray.join("");
+            return;
+        }
+
         var changeCase = function(event) {
             switch (event.target.dataset.caseType) {
                 case "upper":
@@ -82,11 +103,14 @@
                 case "title":
                     findCharacterAndChange(" ");
                     break;
+                case "sentence":
+                    findCharacterAndChange(".");
+                    break;
                 case "reverse":
                     reverseCase();
                     break;
-                case "sentence":
-                    findCharacterAndChange(".");
+                case "normalize":
+                    normalize();
                     break;
                 case "restore":
                     setOriginal();
