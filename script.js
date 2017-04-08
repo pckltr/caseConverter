@@ -1,9 +1,24 @@
 (function() {
     var init = function() {
-        var inputArea = document.getElementById('input-area');
-        var buttonList = document.getElementsByClassName('button');
-        var originalInput = inputArea.value;
+        var inputArea = document.getElementById('input-area'),
+            buttonList = document.getElementsByClassName('button'),
+            originalInput = "";
+
+        var getOriginal = function() {
+            var currentInput = inputArea.value,
+                currentInputTemp = currentInput.toLowerCase(),
+                originalInputTemp = originalInput.toLowerCase();
+            if (currentInputTemp !== originalInputTemp) {
+                originalInput = currentInput;
+            }
+        }
+
+        var setOriginal = function() {
+            inputArea.value = originalInput;
+        }
+
         var copyToClipboard = function() {
+            getOriginal();
             if (document.getElementById('input-area').value !== " ") {
                 inputArea.select();
                 document.execCommand('copy');
@@ -19,7 +34,9 @@
             }
             return;
         }
+
         var findCharacterAndChange = function(character) {
+            getOriginal();
             var valueArray = inputArea.value.toLowerCase().split("");
             for (var i = 0; i < valueArray.length; i++) {
                 if (i === 0) {
@@ -35,7 +52,9 @@
             inputArea.value = valueArray.join("");
             return;
         }
+
         var reverseCase = function() {
+            getOriginal();
             var valueArray = inputArea.value.split("");
             for (var i = 0; i < valueArray.length; i++) {
                 if (valueArray[i] === valueArray[i].toUpperCase()) {
@@ -47,12 +66,15 @@
             inputArea.value = valueArray.join("");
             return;
         }
+
         var changeCase = function(event) {
             switch (event.target.dataset.caseType) {
                 case "upper":
+                    getOriginal();
                     inputArea.value = inputArea.value.toUpperCase();
                     break;
                 case "lower":
+                    getOriginal();
                     inputArea.value = inputArea.value.toLowerCase();
                     break;
                 case "title":
@@ -64,17 +86,21 @@
                 case "sentence":
                     findCharacterAndChange(".");
                     break;
-                case "clear":
-                    inputArea.value = "";
+                case "restore":
+                    setOriginal();
                     break;
                 case "copy":
                     copyToClipboard();
+                    break;
+                case "clear":
+                    inputArea.value = "";
                     break;
                 default:
                     break;
             }
             return;
         };
+        
         for (var i = 0; i < buttonList.length; i++) {
             buttonList[i].addEventListener("click", changeCase);
         }
